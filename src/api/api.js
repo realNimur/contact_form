@@ -7,7 +7,7 @@ export const getAllProducts = () => {
 };
 
 export const requestToBooking = (data) => {
-  fetch(`${baseUrl}/api/book`, {
+  return fetch(`${baseUrl}/api/book`, {
     method: 'POST',
     body: JSON.stringify(data),
   })

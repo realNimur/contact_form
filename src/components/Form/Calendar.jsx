@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getNumberOfDaysInMonth } from '../../helpers/helpers';
+import {
+  firstDayOfMonth,
+  getNumberOfDaysInMonth,
+  lastDayOfMonth,
+} from '../../helpers/helpers';
 import { getInformationAboutBooking } from '../../api/api';
 
 const Calendar = ({ setDate }) => {
@@ -7,25 +11,15 @@ const Calendar = ({ setDate }) => {
     { length: getNumberOfDaysInMonth() },
     (v, k) => k + 1
   );
-  const [infoBooking, setInfoBooking] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [busyDaysList, setBusyDaysList] = useState([]);
   const [freeDaysList, setFreeDaysList] = useState([]);
 
   useEffect(() => {
-    const addZeroIfNeed = (number) => (number < 10 ? `0${number}` : number);
-    const today = new Date();
-    const from = `${today.getFullYear()}.${addZeroIfNeed(
-      today.getMonth() + 1
-    )}.1`;
-    const to = `${today.getFullYear()}.${addZeroIfNeed(
-      today.getMonth() + 1
-    )}.${getNumberOfDaysInMonth()}`;
-
     setBusyDaysList([]);
     setFreeDaysList([]);
 
-    getInformationAboutBooking(from, to).then((data) => {
+    getInformationAboutBooking(firstDayOfMonth, lastDayOfMonth).then((data) => {
       data.forEach((item) => {
         if (item?.booking?.length > 0) {
           setBusyDaysList((prevState) => [...prevState, item]);
@@ -35,8 +29,6 @@ const Calendar = ({ setDate }) => {
       });
     });
   }, []);
-
-  console.log(busyDaysList);
 
   return (
     <>
@@ -65,29 +57,32 @@ const Calendar = ({ setDate }) => {
             </div>
             <div className="c-calendar__main">
               {arrayDays.map((day) => {
-                const classList = `${
-                  day % 7 === 0 || day % 7 === 6 ? 'light ' : ''
-                }${selectedDate === day ? 'medium underline ' : ''}${
-                  busyDaysList.some((item) => {
-                    console.log(typeof item.date.split('.')[2], typeof day);
-                    console.log(
-                      item.date.split('.')[2],
-                      day,
-                      +item.date.split('.')[2] === day
-                    );
-                    return +item.date.split('.')[2] === day;
-                  })
-                    ? 'line-through'
-                    : ''
-                }`;
+                let freeDay = null;
+                const isFreeDay = freeDaysList.some((item) => {
+                  if (+item.date.split('.')[2] === day) freeDay = item;
+                  return +item.date.split('.')[2] === day;
+                });
+                const isBusyDay = busyDaysList.some(
+                  (item) => +item.date.split('.')[2] === day
+                );
+                const isSelectedDate = selectedDate === day;
+
+                const classList = `${isFreeDay ? '' : 'light '}${
+                  isSelectedDate ? 'medium underline ' : ''
+                }${isBusyDay ? 'line-through' : ''}`;
 
                 const handleClick = () => {
-                  if (day % 7 === 0 || day % 7 === 6) return;
+                  if (!isFreeDay) return;
 
                   const today = new Date();
-                  setDate(
-                    `${today.getFullYear()}.${today.getMonth() + 1}.${day}`
-                  );
+
+                  setDate({
+                    date: `${today.getFullYear()}.${
+                      today.getMonth() + 1
+                    }.${day}`,
+                    start: freeDay.start,
+                    finish: freeDay.finish,
+                  });
                   setSelectedDate(day);
                 };
 

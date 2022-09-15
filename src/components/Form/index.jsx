@@ -4,6 +4,7 @@ import Budget from './Budget';
 import Email from './Email';
 import Name from './Name';
 import Calendar from './Calendar';
+import { requestToBooking } from '../../api/api';
 
 const Form = () => {
   const [isBudgetOK, setBudgetOK] = useState(false);
@@ -37,13 +38,28 @@ const Form = () => {
     setInfoBooking((prevState) => ({ ...prevState, email }));
   };
 
-  const setDate = (date) => {
-    setInfoBooking((prevState) => ({ ...prevState, date }));
+  const setDate = ({ date, start, finish }) => {
+    setInfoBooking((prevState) => ({ ...prevState, date, start, finish }));
   };
 
   const submit = () => {
-    console.log(infoBooking);
-    console.log('isBudgetOK: ', isBudgetOK);
+    if (isBudgetOK) {
+      requestToBooking(
+        JSON.stringify({
+          date: '2022.9.21',
+          start: '18:00',
+          finish: '21:00',
+          name: 'Николай',
+          email: 'test@test.com',
+          note: 'Заметки о заявке',
+          products: ['KSTT7F'],
+        })
+      )
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((e) => console.log(e));
+    }
   };
 
   return (
