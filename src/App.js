@@ -2,20 +2,22 @@ import './styles/vendor.min.css';
 import './styles/app.min.css';
 import Header from './components/Header';
 import MobileMenu from './components/MobileMenu';
-import Form from './components/Form';
 import BackgroundVideo from './components/BackgroundVideo';
 import SuccessSubmit from './components/SuccessSubmit';
+import { useState } from 'react';
+import Form from './components/Form';
 
 function App() {
+  const [isSuccessSubmit, setSuccessSubmit] = useState(false);
+
   return (
     <>
-      <Header />
+      <Header isSuccessSubmit={isSuccessSubmit} />
       <MobileMenu />
-      {/*<Form />*/}
-      <SuccessSubmit />
+      {isSuccessSubmit ? <SuccessSubmit /> : <Form />}
       <BackgroundVideo />
     </>
   );
-};
+}
 
 export default App;
