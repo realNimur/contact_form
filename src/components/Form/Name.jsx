@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import ErrorMessage from '../ErrorMessage';
 
-const Name = ({ setName }) => {
+const Name = ({ setName, errorName }) => {
   const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
@@ -25,9 +26,15 @@ const Name = ({ setName }) => {
           <input
             type="text"
             className="input-control"
+            style={{
+              borderBottomColor: errorName ? '#ff4141' : '#000',
+            }}
             value={inputValue}
             onChange={(event) => setInputValue(event.target.value.trim())}
           />
+          {errorName ? (
+            <ErrorMessage text={'Необходимо заполнить поле'} />
+          ) : null}
         </div>
         <div className="col-1 col-offset-1 d-none-mobile">
           {inputValue?.length > 0 && <span className="txt-22">Ага</span>}

@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Budget = ({ isBudgetOK, setBudgetOK }) => {
-  const handleClick = () => setBudgetOK((prevState) => !prevState);
+const Budget = ({ setNote }) => {
+  const [isBudgetOK, setBudgetOK] = useState(false);
+
+  const handleClick = () => {
+    if (isBudgetOK) {
+      setNote('Бюджет больше 10 000$');
+    } else {
+      setNote('Бюджет меньше 10 000$');
+    }
+    setBudgetOK((prevState) => !prevState);
+  };
 
   return (
     <>
