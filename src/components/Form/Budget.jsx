@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { LangContext } from '../../App';
 
-const Budget = ({ isBudgetOK, setBudgetOK }) => {
-  const handleClick = () => setBudgetOK((prevState) => !prevState);
+const Budget = ({ setPrice }) => {
+  const translate = useContext(LangContext);
+  const [isBudgetOK, setBudgetOK] = useState(false);
+
+  const handleClick = () => {
+    setBudgetOK((prevState) => !prevState);
+    setPrice(!isBudgetOK);
+  };
 
   return (
     <>
@@ -10,7 +17,7 @@ const Budget = ({ isBudgetOK, setBudgetOK }) => {
           <span className="txt-22">2.</span>
         </div>
         <div className="col-5">
-          <span className="txt-22 uppercase">Ваш бюджет</span>
+          <span className="txt-22 uppercase">{translate['THE BUDGET IS']}</span>
         </div>
         <div className="col-1 d-none-desktop">
           <span className="txt-22">2.</span>
@@ -24,7 +31,7 @@ const Budget = ({ isBudgetOK, setBudgetOK }) => {
           <label htmlFor="pp" className="true-checkbox">
             <input type="checkbox" id="pp" className="true-checkbox__input" />
             <span className="true-checkbox__value" onClick={handleClick}>
-              {isBudgetOK ? 'Да' : 'Нет'}
+              {isBudgetOK ? translate['YES'] : translate['NO']}
             </span>
           </label>
         </div>
