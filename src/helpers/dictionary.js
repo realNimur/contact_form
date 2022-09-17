@@ -22,6 +22,10 @@ export const en = {
     "Cool! See you ${1}. We'll email you the Zoom link and arrange an exact time.",
   SubmitInstagram: "DON'T FORGET TO FOLLOW US ON INSTAGRAM",
   SUCCESS: 'SUCCESS',
+  'Invalid email format': 'Invalid email format',
+  'Required field': 'Required field',
+  'Need to choose a day': 'Need to choose a day',
+  MENU: 'MENU',
 };
 
 export const ru = {
@@ -47,4 +51,8 @@ export const ru = {
   SubmitForm: 'Класс! Увидимся ${1}. Ссылочку на Zoom отправим на почту ${2}',
   SubmitInstagram: 'ПОДПИШИТЕСЬ НА ИНСТАГРАМ ЗАОДНО',
   SUCCESS: 'УСПЕХ',
+  'Invalid email format': 'Неверный формат email',
+  'Required field': 'Необходимо заполнить поле',
+  'Need to choose a day': 'Необходимо выбрать день',
+  MENU: 'Меню',
 };

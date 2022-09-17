@@ -36,10 +36,10 @@ const Email = ({ setEmail, errorEmail }) => {
             onChange={(event) => setInputValue(event.target.value.trim())}
           />
           {errorEmail === 1 ? (
-            <ErrorMessage text={'Необходимо заполнить поле'} />
+            <ErrorMessage text={translate['Required field']} />
           ) : null}
           {errorEmail === 2 ? (
-            <ErrorMessage text={'Неверный формат email'} />
+            <ErrorMessage text={translate['Invalid email format']} />
           ) : null}
         </div>
         <div className="col-1 col-offset-1 col-offset-mobile-0 d-none-mobile">

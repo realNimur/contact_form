@@ -1,10 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import MobileMenu from './MobileMenu';
 import { en, ru } from '../helpers/dictionary';
 import { LangContext } from '../App';
 
 const Header = ({ isSuccessSubmit = false, setLang }) => {
   const translate = useContext(LangContext);
+  const [showMenu, setShowMenu] = useState(false);
+
+  const changeLang = (lang) => {
+    window.history.pushState('', '', `?lang=${lang}`);
+  };
+
+  useEffect(() => {
+    if (showMenu) {
+      document.body.classList.add('scroll-disabled');
+    } else {
+      document.body.classList.remove('scroll-disabled');
+    }
+  }, [showMenu]);
 
   return (
     <>
@@ -20,17 +33,35 @@ const Header = ({ isSuccessSubmit = false, setLang }) => {
           <div className="header__group">
             <ul className="header__list header__list--mobile">
               <li className="header__item header__item--active">
-                <a href="#" className="header__elem" id="menu-toggle">
-                  Меню
-                </a>
+                <span
+                  style={{
+                    cursor: 'pointer',
+                  }}
+                  className="header__elem"
+                  onClick={() => setShowMenu(true)}
+                >
+                  {translate['MENU']}
+                </span>
               </li>
               <li className="header__item">
-                <span onClick={() => setLang(ru)} className="header__elem">
+                <span
+                  onClick={() => {
+                    changeLang('ru');
+                    setLang(ru);
+                  }}
+                  className="header__elem"
+                >
                   Ru
                 </span>
               </li>
               <li className="header__item header__item--active">
-                <span onClick={() => setLang(en)} className="header__elem">
+                <span
+                  onClick={() => {
+                    changeLang('en');
+                    setLang(en);
+                  }}
+                  className="header__elem"
+                >
                   En
                 </span>
               </li>
@@ -76,7 +107,10 @@ const Header = ({ isSuccessSubmit = false, setLang }) => {
                 }`}
               >
                 <span
-                  onClick={() => setLang(ru)}
+                  onClick={() => {
+                    changeLang('ru');
+                    setLang(ru);
+                  }}
                   style={{ cursor: 'pointer' }}
                   className="header__elem"
                 >
@@ -89,7 +123,10 @@ const Header = ({ isSuccessSubmit = false, setLang }) => {
                 }`}
               >
                 <span
-                  onClick={() => setLang(en)}
+                  onClick={() => {
+                    changeLang('en');
+                    setLang(en);
+                  }}
                   style={{ cursor: 'pointer' }}
                   className="header__elem"
                 >
@@ -126,7 +163,7 @@ const Header = ({ isSuccessSubmit = false, setLang }) => {
           </span>
         </div>
       </header>
-      <MobileMenu />
+      <MobileMenu showMenu={showMenu} setShowMenu={setShowMenu} />
     </>
   );
 };

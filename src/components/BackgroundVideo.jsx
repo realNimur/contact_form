@@ -1,4 +1,7 @@
 import React from 'react';
+import bgVideoMOV from './../video_bg/match-video.mov';
+import bgVideoWEBM from './../video_bg/match-video.webm';
+import bgVideoWEBMMobile from './../video_bg/match-video-mobile.webm';
 
 const BackgroundVideo = () => {
   return (
@@ -12,11 +15,8 @@ const BackgroundVideo = () => {
         autoPlay
         playsInline
       >
-        <source
-          src="video_bg/match-video.mov"
-          type='video/mp4; codecs="hvc1"'
-        />
-        <source src="video_bg/match-video.webm" type="video/webm" />
+        <source src={bgVideoMOV} type='video/mp4; codecs="hvc1"' />
+        <source src={bgVideoWEBM} type="video/webm" />
       </video>
       <video
         className="background-video background-video--bottom background-video--mobile"
@@ -27,7 +27,7 @@ const BackgroundVideo = () => {
         autoPlay
         playsInline
       >
-        <source src="video_bg/match-video-mobile.webm" type="video/webm" />
+        <source src={bgVideoWEBMMobile} type="video/webm" />
       </video>
     </>
   );

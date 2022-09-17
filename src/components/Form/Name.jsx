@@ -35,7 +35,7 @@ const Name = ({ setName, errorName }) => {
             onChange={(event) => setInputValue(event.target.value.trim())}
           />
           {errorName ? (
-            <ErrorMessage text={'Необходимо заполнить поле'} />
+            <ErrorMessage text={translate['Required field']} />
           ) : null}
         </div>
         <div className="col-1 col-offset-1 d-none-mobile">

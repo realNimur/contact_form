@@ -79,7 +79,9 @@ const CalendarSection = ({ setDate, errorDay }) => {
         </div>
         <div className="col-5">
           <span className="txt-22 uppercase">{translate['PICK A DATE']}</span>
-          {errorDay ? <ErrorMessage text={'Необходимо выбрать день'} /> : null}
+          {errorDay ? (
+            <ErrorMessage text={translate['Need to choose a day']} />
+          ) : null}
         </div>
         <div className="col-1 d-none-desktop">
           <span className="txt-22">5.</span>

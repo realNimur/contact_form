@@ -9,6 +9,10 @@ export const getAllProducts = () => {
 export const requestToBooking = (data) => {
   return fetch(`${baseUrl}/api/book`, {
     method: 'POST',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(data),
   })
     .then((data) => data.json())

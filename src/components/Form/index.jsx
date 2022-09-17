@@ -18,7 +18,7 @@ const Form = ({ setInfoUser, setSuccessSubmit }) => {
     email: '',
     start: '',
     finish: '',
-    note: 'Здесь заметки',
+    note: '',
     products: [],
     price: false,
   });
@@ -89,7 +89,6 @@ const Form = ({ setInfoUser, setSuccessSubmit }) => {
 
     requestToBooking(infoBooking)
       .then((data) => {
-        console.log(data);
         setInfoUser({
           date: infoBooking.date,
           email: infoBooking.email,
