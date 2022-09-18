@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { LangContext } from '../App';
+import { en, ru } from '../helpers/dictionary';
 
-const MobileMenu = ({ showMenu, setShowMenu }) => {
+const MobileMenu = ({ showMenu, setShowMenu, setLang, changeLang }) => {
   const translate = useContext(LangContext);
 
   return (
@@ -56,15 +57,23 @@ const MobileMenu = ({ showMenu, setShowMenu }) => {
             </li>
           </ul>
           <ul className="mobile-menu__list mobile-menu__list--flex">
-            <li className="mobile-menu__item">
-              <a href="#" className="mobile-menu__link">
-                Ru
-              </a>
+            <li
+              className="mobile-menu__item"
+              onClick={() => {
+                setLang(ru);
+                changeLang('ru');
+              }}
+            >
+              <span className="mobile-menu__link">Ru</span>
             </li>
-            <li className="mobile-menu__item mobile-menu__item--active">
-              <a href="/matching/apply/en/" className="mobile-menu__link">
-                En
-              </a>
+            <li
+              className="mobile-menu__item mobile-menu__item--active"
+              onClick={() => {
+                setLang(en);
+                changeLang('en');
+              }}
+            >
+              <span className="mobile-menu__link">En</span>
             </li>
           </ul>
           <ul className="mobile-menu__list">

@@ -163,7 +163,12 @@ const Header = ({ isSuccessSubmit = false, setLang }) => {
           </span>
         </div>
       </header>
-      <MobileMenu showMenu={showMenu} setShowMenu={setShowMenu} />
+      <MobileMenu
+        showMenu={showMenu}
+        setShowMenu={setShowMenu}
+        setLang={setLang}
+        changeLang={changeLang}
+      />
     </>
   );
 };
